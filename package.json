@@ -1,5 +1,5 @@
 {
-  "name": "@zilles-edv/date-picker",
+  "name": "@capacitor-community/date-picker",
   "version": "1.0.0",
   "description": "Native DateTime Picker Plugin for Capacitor Apps",
   "main": "dist/esm/index.js",
