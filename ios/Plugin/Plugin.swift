@@ -114,7 +114,7 @@ public class DatePickerPlugin: CAPPlugin {
         
         self.defaultPaddingHeight = (UIDevice.current.hasNotch ? 15 : 0)
         
-        self.alertSize = CGSize(width: self.bridge?.viewController.view.bounds.size.width, height: 250 + self.defaultButtonHeight + self.defaultPaddingHeight)
+        self.alertSize = CGSize(width: self.bridge?.viewController?.view.bounds.size.width ?? 0, height: 250 + self.defaultButtonHeight + self.defaultPaddingHeight)
         
         if (self.pickerTheme == "dark" || self.pickerTheme == "legacyDark") {
             self.defaultDark()
@@ -264,8 +264,16 @@ public class DatePickerPlugin: CAPPlugin {
         self.createOkButton()
         self.createCancelButton()
         
-        let width = self.bridge?.viewController.view.bounds.size.width
-        let height = self.bridge?.viewController.view.bounds.size.height
+        if(self.bridge == nil) {
+            return
+        }
+        
+        if(self.bridge?.viewController == nil) {
+            return
+        }
+        
+        let width = self.bridge?.viewController?.view.bounds.size.width
+        let height = self.bridge?.viewController?.view.bounds.size.height
         
         if (self.alertView == nil) {
             self.alertView = UIView()
@@ -278,8 +286,8 @@ public class DatePickerPlugin: CAPPlugin {
         
         lineView.backgroundColor = UIColor(red: 198/255, green: 198/255, blue: 198/255, alpha: 1)
         
-        self.alertView?.frame.origin.y = height - self.alertSize.height
-        self.alertView?.frame.size.width = width
+        self.alertView?.frame.origin.y = (height ?? 0) - self.alertSize.height
+        self.alertView?.frame.size.width = (width ?? 0)
         self.alertView?.frame.size.height = self.alertSize.height
         self.alertView?.backgroundColor = UIColor(hexString: self.pickerBgColor)
         
@@ -318,8 +326,11 @@ public class DatePickerPlugin: CAPPlugin {
             }, completion: { (finished: Bool) in
                 self.backgroundView!.removeFromSuperview()
             })
-            UIView.transition(with: self.bridge?.viewController.view, duration: 0.25, options: [.curveEaseIn], animations: {
-            }, completion: nil)
+            
+            /*if(self.bridge?.viewController?.view != nil) {
+                UIView.transition(with: self.bridge.viewController.view, duration: 0.25, options: [.curveEaseIn], animations: {
+                }, completion: nil)
+            }*/
         }
     }
     
@@ -420,11 +431,11 @@ public class DatePickerPlugin: CAPPlugin {
             }
             self.backgroundView!.backgroundColor = UIColor(hexString: "#00000000")
 
-            let x = self.bridge?.viewController.view.bounds.size.width
-            let y = self.bridge?.viewController.view.bounds.size.height
+            let x = self.bridge?.viewController?.view.bounds.size.width
+            let y = self.bridge?.viewController?.view.bounds.size.height
 
-            self.backgroundView!.frame.size.width = x
-            self.backgroundView!.frame.size.height = y
+            self.backgroundView!.frame.size.width = x ?? 0
+            self.backgroundView!.frame.size.height = y ?? 0
             self.backgroundView!.addSubview(self.alertView!)
 
             self.alertView?.addSubview(self.titleView!);
@@ -432,7 +443,7 @@ public class DatePickerPlugin: CAPPlugin {
             let height = self.alertView!.frame.size.height
             self.alertView!.center.y += height
             
-            self.bridge?.viewController.view.addSubview(self.backgroundView!)
+            self.bridge?.viewController?.view.addSubview(self.backgroundView!)
             
             UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseInOut], animations: {
                 self.backgroundView!.backgroundColor = UIColor(hexString: "#00000088")
