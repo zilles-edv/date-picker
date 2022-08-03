@@ -1,6 +1,6 @@
 {
-  "name": "@capacitor-community/date-picker",
-  "version": "0.2.3",
+  "name": "@zilles-edv/date-picker",
+  "version": "1.0.0",
   "description": "Native DateTime Picker Plugin for Capacitor Apps",
   "main": "dist/esm/index.js",
   "types": "dist/esm/index.d.ts",
@@ -15,10 +15,10 @@
     "contributors:add": "all-contributors add",
     "contributors:gen": "all-contributors generate"
   },
-  "author": "Stewan Silva",
+  "author": "Jonas Zilles",
   "license": "MIT",
   "dependencies": {
-    "@capacitor/core": "^2.0.0"
+    "@capacitor/core": "^4.0.0"
   },
   "devDependencies": {
     "@capacitor/android": "latest",
@@ -49,9 +49,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/capacitor-community/date-picker"
+    "url": "https://github.com/zilles-edv/date-picker"
   },
   "bugs": {
-    "url": "https://github.com/capacitor-community/date-picker/issues"
+    "url": "https://github.com/zilles-edv/date-picker/issues"
   }
 }
